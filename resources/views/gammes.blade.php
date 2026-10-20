@@ -5,18 +5,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Gammes - Colles Castelleres</title>
+        <style>
+            .error {
+                background-color: rgba(255, 0, 0, 0.3);
+            }
+
+            .ok {
+                background-color: rgba(0, 255, 0, 0.3);
+            }
+        </style> 
     </head>
     <body>
-        <h1>Us donem la benvinguda a l'aplicació de Colles Castelleres</h1>
-        <p>Aplicació desenvolupada per Eina Coma</p>
-        <h2>Dificultats trobades</h2>
-        <p>No he trobat grans dificultat en el transcurs de l'EAC.
-            Ja havia treballat anteriorment tant amb Laravel com amb IsardVDI.</p>
-        <h2>Rutes</h2>
-        <ul>
-            <li><a href="/gammes">Calculadora de gammes</a></li>
-            <li><a href="/calendari">Calendari de diades</a></li>
-            <li><a href="/castellers">Gestió i consulta de membres de la colla</a></li>
-        </ul>
+        <h1>Calculadora de Gammes</h1>
+        <form action="{{ route('gammes.calcular') }}" method="post">
+            @csrf
+            <label for="pisos">Nombre de pisos del castell que es vol intentar: </label>
+            <input type="number" name="pisos" id="pisos" value="{{ old('pisos') }}">
+            <button type="submit">Calcula</button>
+            @error('pisos')
+                <div class="error">{{ $message }}</div>
+            @enderror
+            @if(session('missatge'))
+                <div class="ok">{!! session('missatge') !!}</div>
+            @endif
+        </form>
     </body>
 </html>
