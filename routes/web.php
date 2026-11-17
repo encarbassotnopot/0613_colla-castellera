@@ -12,9 +12,6 @@ Route::get('/', function () {
 Route::get('/gammes', [GammesController::class, 'index'])->name('gammes.index');
 Route::post('/gammes', [GammesController::class, 'calcular'])->name('gammes.calcular');
 
-
 Route::get('/calendari', [CalendariController::class, 'index'])->name('calendari.index');
 
-
-Route::get('/castellers', [CastellersController::class, 'index'])->name('castellers.index');
-Route::post('/castellers', [CastellersController::class, 'alta'])->name('castellers.alta');
+Route::resource('castellers', CastellersController::class);
